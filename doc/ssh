@@ -1,0 +1,19 @@
+创建密钥
+ssh-keygen -t rsa
+无密码登陆：
+mkdir .ssh
+touch ~/.ssh/authorized_keys
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+cat /tmp/id_rsa.pub >> ~/.ssh/authorized_keys
+
+客户端设置：
+$HOME/.ssh/config
+Host myserver
+    HostName test.something.org
+    Port 2222
+    User flamen
+
+
+然后就可以 ssh myserver了
+

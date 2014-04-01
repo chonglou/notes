@@ -1,0 +1,8 @@
+获取远程分支
+git fetch
+git checkout -b local-branchname origin/remote_branchname 
+
+删除远程分支
+git push origin --delete branchName
+
+

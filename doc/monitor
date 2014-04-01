@@ -1,0 +1,44 @@
+===============MySQL==========
+用户最好独立出来
+CREATE USER 'user'@'host' IDENTIFIED BY  'password';
+CREATE USER 'user'@'host' IDENTIFIED BY  'password';
+不需要任何权限
+
+===============Nginx==========
+编译时加上：--with-http_stub_status_module
+nginx.conf中修改:
+http {
+    server {
+        listen       80;
+        server_name  localhost;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+
+        location /nginx-status {
+            stub_status on;
+            access_log  off;
+        }
+    }
+}
+打开：http://your-domain/nginx-status可以看结果
+===============SNMP===========
+安装:
+apt-get install snmp snmpd
+
+添加只读用户(需要snmp服务没有运行，否则无法添加)
+vi /etc/snmp/snmpd.conf：
+rouser username auth 
+vi /var/lib/snmp/snmpd.conf:
+createUser username MD5 password
+注意：密码至少8个字节 启动后会自动被snmpd删除
+
+net-snmp-create-v3-user -ro -A snmpv3pass -a MD5 -x DES  snmpv3user
+或（ubuntu）
+net-snmp-config --create-snmpv3-user -ro -A snmpv3pass -a MD5 -x DES snmpv3user 
+测试：
+snmpwalk -v 3 -u username -a MD5 -A "password" -l authNoPriv 127.0.0.1 iso.3.6.1.2.1.1.1.0
+
+

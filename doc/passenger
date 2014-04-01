@@ -1,0 +1,19 @@
+
+================安装passenger(gem)==================
+依赖:
+apt-get install ruby 
+apt-get install build-essential libpcre3-dev libssl-dev zlib1g
+gem install passenger
+passenger-config --root #查看安装路径
+
+================安装passenger(deb)==================
+依赖:
+apt-get install ruby 
+apt-get install build-essential libpcre3-dev libssl-dev zlib1g
+tar xf passenger-4.0.37.tar.gz
+gem install mizuho
+rake debian:source_packages
+rake debian:binary_packages
+passenger-config --root #查看安装路径
+
+

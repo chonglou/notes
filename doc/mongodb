@@ -1,0 +1,6 @@
+显示所有db: show dbs
+当前db：db
+使用db： use dbname
+备份：mongodump -h dbhost -d dbname -o dbdirectory
+恢复：mongorestore -h dbhost -d dbname --directoryperdb dbdirectory
+

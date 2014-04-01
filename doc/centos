@@ -1,0 +1,24 @@
+禁用selinux:
+vi /etc/sysconfig/selinux:
+SELINUX=disabled
+
+关闭启动进度条，显示详细信息：
+vim /boot/grub/grub.conf
+去掉rhgb
+
+
+列出所有安装的包:
+rpm -qa
+
+
+服务管理
+chkconfig
+chkconfig aaa on|off
+
+bash-completion:
+./configure --prefix=/opt/bash-completion
+make
+make install
+
+.bashrc中增加：
+. /opt/bash-completion/etc/profile.d/bash_completion.sh

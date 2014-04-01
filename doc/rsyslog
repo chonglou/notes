@@ -1,0 +1,92 @@
+==========ubuntu下安装============
+导入pgp key
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com AEF0CF8E
+gpg --export --armor AEF0CF8E |  apt-key add -
+
+添加源(/etc/apt/sources.list)
+# rsyslog repository
+deb http://ubuntu.adiscon.com/v7-stable precise/
+deb-src http://ubuntu.adiscon.com/v7-stable precise/
+
+安装
+apt-get update && apt-get upgrade
+apt-get install rsyslog
+
+==========Centos下安装============
+wget http://rpms.adiscon.com/v7-stable/rsyslog.repo
+cp rsyslog.repo /etc/yum.repos.d/ 
+yum update
+
+
+
+==========测试====================
+logger "##### test ###### `date`"
+tail /var/log/syslog
+
+==========远程日志================
+服务器上新建文件/etc/rsyslog.d/90-custom.conf 内容
+$ModLoad imtcp
+$InputTCPServerRun 514
+$template default,"/tmp/logs/%HOSTNAME%/%$now%.log"
+*.* ?default
+
+目录需要chown syslog:syslog
+
+客户端上新建文件/etc/rsyslog.d/90-custom.conf 内容
+*.* @@服务器ip:514
+
+修改/etc/hosts
+127.0.0.1 主机名 localhost
+确认主机名在localhost之前 否则服务器上都是localhost 无法区分
+
+===========OpenSSL证书 服务端============
+安装依赖
+apt-get install gnutls-bin rsyslog-gnutls
+创建私钥
+certtool --generate-privkey --outfile ca-key.pem
+创建自验证证书
+certtool --generate-self-signed --load-privkey ca-key.pem --outfile ca.pem
+创建私钥
+certtool --generate-privkey --outfile key.pem
+创建证书请求
+certtool --generate-request --load-privkey key.pem --outfile request.pem
+创建证书
+certtool --generate-certificate --load-request request.pem --outfile cert.pem --load-ca-certificate ca.pem --load-ca-privkey ca-key.pem
+mkdir /opt/rsyslogd #证书存放地址
+cp * /opt/rsyslogd
+chmod -w /opt/rsyslogd/*
+
+现在会有五个文件：ca-key.pem  ca.pem  cert.pem  key.pem  request.pem
+注意：只发布ca.pem """ca-key.pem是私钥"""
+除了request.pem之外的四个文件都需要复制过去
+
+修改文件/etc/rsyslog.d/90-custom.conf 内容
+# make gtls driver the default
+$DefaultNetstreamDriver gtls
+# certificate files
+$DefaultNetstreamDriverCAFile /etc/rsyslog.d/ca.pem
+$DefaultNetstreamDriverCertFile /etc/rsyslog.d/cert.pem
+$DefaultNetstreamDriverKeyFile /etc/rsyslog.d/key.pem
+$ModLoad imtcp # load TCP listener
+$InputTCPServerStreamDriverMode 1 # run driver in TLS-only mode
+$InputTCPServerStreamDriverAuthMode anon # client is NOT authenticated
+$InputTCPServerRun 514 # 监听514端口
+
+$RepeatedMsgReduction off #关闭"message repeated"功能
+
+===========OpenSSL证书 客户端============
+把ca.pem复制过来 放/etc/rsyslog.d下
+chmod -w ca.pem
+
+修改文件/etc/rsyslog.d/90-custom.conf 内容
+# certificate files - just CA for a client
+$DefaultNetstreamDriverCAFile /etc/rsyslog.d/ca.pem
+# set up the action
+$DefaultNetstreamDriver gtls # use gtls netstream driver
+$ActionSendStreamDriverMode 1 # require TLS for the connection
+$ActionSendStreamDriverAuthMode anon # server is NOT authenticated
+#*.* @@(o)服务器ip:514 # send (all) messages
+*.* @@服务器ip:514 # send (all) messages
+
+
+

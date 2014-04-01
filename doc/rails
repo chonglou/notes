@@ -1,0 +1,114 @@
+gem install rails
+apt-get install libsqlite3-dev
+rails --version
+rails new myapp
+
+生成文档:
+apt-get install nodejs
+rake doc:rails
+
+启动：
+rails server
+
+创建控制器
+rails generate controller Demo hello bye
+
+============模板================
+<%= link_to "label", url_path %>
+<% for %>
+<%= %>
+<% end %>
+layout:
+app/views/layouts/application.html.erb
+
+cycle 自动切换
+truncate 80 显示前80个字符 
+strip_tags 去除字符中的html标签
+link_to :confirm=>确认弹窗 :method=> :delete
+局部模板 前缀加_
+
+分页 will_paginate插件
+====================脚手架========
+rails generate scaffold Product title:string, description:text
+db/migrate/2014....rb
+td.:decimal :price, :precision=>8, :scale=>2
+rake db:migrate
+vi db/seeds.rb
+rake db:seed
+=================其它＝＝＝＝＝＝＝＝＝＝＝
+数据验证放model层
+validates :title, :description, :persence=>true 验证不能为空
+:uniqueness=>true 唯一
+:format=>{
+:with => %r{\.(git|jpg|png)$}i,
+:message =''
+}
+:greater_than_or_equal_to => 0.01
+
+default_scope :order=>'title'
+
+
+flash用于存储会话数据
+logger.error
+redirect_to store_url, :notice=>"aaa"
+
+
+product_path vs product_url
+后者包含协议和域名的完整信息，302需要
+
+config.action_mailer.delivery_method = :smtp | :sendmail | :test
+rails generate mailer Notifier o1 o2
+
+rails generate migration aaa
+
+stylesheet_link_tag
+filter_parameter_logging :password 
+CSRF
+reset_session
+
+=======错误处理==========
+Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes.
+安装nodejs 或 Gemfile中增加: gem 'therubyracer'
+
+rails generate controller StaticPages home help --no-test-framework
+
+========nginx and ssl=================
+openssl req -new -nodes -keyout server.key -out server.csr
+openssl x509 -req -days 3650 -in server.csr -signkey server.key -out server.crt
+
+server {
+    listen       443;
+    server_name domain.com;
+
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+  
+    ssl                  on;
+    ssl_certificate      ssl/server.crt;
+    ssl_certificate_key  ssl/server.key;    
+    ssl_session_timeout  5m;    
+    ssl_protocols  SSLv2 SSLv3 TLSv1;
+    ssl_ciphers  HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers   on;
+ 
+    location /3rd {
+    	alias /path_to_app/public/3rd;
+	expires max;
+    }
+    location /assets {
+    	alias /path_to_app/public/assets;
+    }
+
+    location / { 
+	proxy_set_header   Host    $host; 
+	proxy_set_header   X-Real-IP   $remote_addr; 
+    	proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for; 
+        proxy_set_header   X-Forwarded-Proto https;
+        proxy_redirect     off;
+	proxy_pass         http://localhost:8080; 
+    }
+}
+
+
+=============不创建helpper test框架等==================
+rails generate controller aaa/ddd index --no-test-framework --no-helper --no-assets

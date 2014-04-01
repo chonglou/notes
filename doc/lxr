@@ -1,0 +1,12 @@
+apt-get install libfile-mmagic-perl swish-e ctags libclass-dbi-mysql-perl
+
+cd /opt/lxr ./genxref --checkonly  
+./scripts/configure-lxr.pl -vv 
+
+数据库账号不要用root
+
+./custom.d/initdb.sh
+cp custom.d/lxr.conf . 
+
+genxref --url=http://lxr.0-dong.com/lxr --version=linux-3.13.3
+记得修改lxr.conf中域名

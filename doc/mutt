@@ -1,0 +1,17 @@
+.muttrc增加
+set mbox_type=Maildir
+set folder=$HOME/.mail
+set spoolfile=~/.mail/
+set header_cache=~/.mail/.hcache
+
+创建.offlineimaprc
+[Repository myremote]
+type = IMAP 
+remotehost = imap.myhost.com 
+ssl = yes 
+# remoteport = 993 
+remoteuser = myremoteusername 
+remotepass = myremotepassword
+
+创建spool目录
+mkdir -p ~/.mail/{cur,new,tmp} 

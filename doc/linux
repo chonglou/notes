@@ -1,0 +1,2 @@
+测试tcp端口是否打开：
+nc -z <host> <port>

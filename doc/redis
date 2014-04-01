@@ -1,0 +1,8 @@
+清空数据库
+FLUSHALL 
+
+列出所有KEY
+KEYS *
+
+查看KEY类型
+TYPE name

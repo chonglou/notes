@@ -1,0 +1,3 @@
+=======gpg 错误 ========
+GPG error: http://us-east-1.ec2.archive.ubuntu.com precise-updates Release: The following signatures were invalid: BADSIG xxxxxxxxxxx Ubuntu Archive Automatic Signing Key <ftpmaster@ubuntu.com>
+解决办法：apt-key adv --keyserver keyserver.ubuntu.com --recv-keys xxxxxxxxxx

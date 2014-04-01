@@ -1,0 +1,7 @@
+设置语法加亮：
+syntax on
+
+设置后缀名aaa的为ruby模式
+:setfiletype ruby
+或者.vimrc中添加
+au BufRead,BufNewFile *.aaa setfiletype ruby

@@ -1,0 +1,23 @@
+编辑conf/hbase-site.xml，增加数据目录
+  <property>
+  <name>hbase.rootdir</name>
+  <value>file:////var/lib/hbase</value>
+  </property>
+
+修改 增加
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+
+启动: ./bin/start-hbase.sh
+
+连接：
+./bin/hbase shell
+
+修改文件数：
+vi /etc/security/limits.conf:
+username - nofile 32768
+username soft/hard nproc 32000
+vi /etc/pam.d/common-session:
+session required  pam_limits.so
+
+管理界面：
+http://localhost:60010

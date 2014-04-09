@@ -1,0 +1,39 @@
+tar xf graylog2-server-0.20.1.tgz
+cp graylog2.conf.example /etc/graylog2.conf
+
+vi /etc/graylog2.conf修改
+password_secret # pwgen -s 96
+root_password_sha2 #echo -n yourpassword | shasum -a 256
+
+安装jdk和mongodb
+apt-get install openjdk-7-jre mongodb
+
+安装elasticsearch
+wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.1.0.deb
+dpkg -i elasticsearch-1.1.0.deb
+
+文件限制至少：64000 vim /etc/security/limits.conf
+*  soft nofile 65000
+*  hard nofile 65000
+
+vi /etc/elasticsearch/elasticsearch.yml:修改cluster.name与graylog2.conf中elasticsearch_cluster_name一致
+检查：curl -XGET 'http://localhost:9200/_cluster/health?pretty=true' 
+
+如果只有一台elasticsearch
+elasticsearch_shards=1
+elasticsearch_replicas=0
+
+关闭发现模式：
+# Disable multicast
+elasticsearch_discovery_zen_ping_multicast_enabled = false
+# List of ElasticSearch nodes to connect to
+elasticsearch_discovery_zen_ping_unicast_hosts = es-node-1.example.org:9300,es-node-2.example.org:9300
+
+touch /etc/graylog2-server-node-id
+chown yourname /etc/graylog2-server-node-id
+
+测试启动：
+java -jar graylog2-server.jar --debug
+
+启动：
+./bin/graylog2ctl start

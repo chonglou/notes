@@ -1,0 +1,20 @@
+============== 日志报Message is frozen
+如果过去八天（timeout_frozen_after）邮件仍然投递不出去，会被标记为forzen
+
+检查forzen队列:
+exim -bp | grep frozen | wc -l
+
+移除forzen邮件：
+exim -bpru | grep frozen | awk '{print $3}' |xargs exim -Mrm
+
+确认结果：
+exim -bpc
+
+============常用工具
+exiwhat 当前状态
+eximstats 根据日志统计信息
+发送邮件的域名在/etc/mailname
+exiqsumm 邮件队列信息
+检查配置文件：exim4 -bV
+
+调试模式启动：exim -bd -d

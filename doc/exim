@@ -1,0 +1,3 @@
+dpkg-reconfigure exim4-config 
+update-exim4.conf
+service exim4 restart

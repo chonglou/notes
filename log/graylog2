@@ -8,9 +8,9 @@ root_password_sha2 #echo -n yourpassword | shasum -a 256
 安装jdk和mongodb
 apt-get install openjdk-7-jre mongodb
 
-安装elasticsearch
-wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.1.0.deb
-dpkg -i elasticsearch-1.1.0.deb
+安装elasticsearch(注意版本要一致 否则会抱classnotfoundexception)
+https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.10.deb
+dpkg -i elasticsearch-0.90.10.deb
 
 文件限制至少：64000 vim /etc/security/limits.conf
 *  soft nofile 65000
@@ -37,3 +37,20 @@ java -jar graylog2-server.jar --debug
 
 启动：
 ./bin/graylog2ctl start
+
+
+=======web interface 安装===========
+tar xf graylog2-web-interface-0.20.1.tgz
+cd graylog2-web-interface-0.20.1
+
+vi conf/graylog2-web-interface.conf
+graylog2-server.uris="http://127.0.0.1:12900/
+application.secret="" # pwgen -s 96
+
+启动
+bin/graylog2-web-interface
+
+
+设置日志ttl:
+curl -XPUT 'http://localhost:9200/graylog2/'
+curl -XPUT "http://localhost:9200/graylog2/message/_mapping" -d'{"message": {"_ttl" : { "enabled" : true, "default" : "30d" }}}'

@@ -31,3 +31,11 @@ openssl pkcs12 -export -clcerts -in server/server-cert.pem -inkey server/server-
 openssl verify -CAfile root/root-cert.pem server/server-cert.pem
 
 
+======查看内容=========
+查看key
+openssl rsa -noout -text -in server-key.pem
+查看csr
+openssl req -noout -text -in server-req.csr
+查看cert
+openssl x509 -noout -text -in server-cert.pem
+

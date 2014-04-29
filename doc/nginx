@@ -21,7 +21,19 @@ override_dh_auto_configure
 dpkg-buildpackage -rfakeroot
 修改源码之后 需要dpkg-source --commit提交补丁
 
+
 可以:"dpkg -x nginx_1.4.6-1_amd64.deb . "看结果
 
 nginx -V 看当前配置 
 nginx -t 测试配置文件
+
+
+
+===============
+debian/package.upstart
+If this exists, it is installed into etc/init/package.conf in the
+package build directory.
+
+debian/package.init
+Otherwise, if this exists, it is installed into etc/init.d/package
+in the package build directory. 

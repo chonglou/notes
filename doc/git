@@ -5,4 +5,14 @@ git checkout -b local-branchname origin/remote_branchname
 删除远程分支
 git push origin --delete branchName
 
+放弃未提交的更改：
+git reset --hard
+放弃未跟踪的文件及目录：
+git clean -fd
+
+
+比较分支
+git diff topic master     # 将两个分支上最新的提交做diff，相当于diff了两个commit
+git diff topic..master    # 同上
+git diff topic...master   # 输出自topic与master分别开发以来，master分支上的change
 

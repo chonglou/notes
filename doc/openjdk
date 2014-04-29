@@ -17,3 +17,15 @@ make all
 make install
 
 export PATH=/opt/bin:$PATH
+
+
+mac下编译
+export ALT_BOOTDIR=`/usr/libexec/java_home -v 1.7`
+unset JAVA_HOME
+
+CPATH="/usr/X11/include" LANG=C make ALLOW_DOWNLOADS=true ALT_BOOTDIR=`/usr/libexec/java_home -v 1.7+` HOTSPOT_BUILD_JOBS=`sysctl -n hw.ncpu`
+冒烟测试
+build/macosx-universal/j2sdk-image/bin/java -version
+安装：
+mkdir -p ~/Library/Java/JavaVirtualMachines
+cp -R build/macosx-universal/j2sdk-bundle/jdk1.8.0.jdk ~/Library/Java/JavaVirtualMachines

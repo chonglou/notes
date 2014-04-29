@@ -28,4 +28,10 @@ rbenv global 2.1.0
 list all available version:
 rbenv versions
 
+更新:
+cd ~/.rbenv 
+git pull
+cd  ~/.rbenv/plugins/ruby-build
+git pull
+
 

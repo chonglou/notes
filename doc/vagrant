@@ -1,0 +1,54 @@
+列出box: vagrant box list
+添加box：vagrant box add your_name your_url
+初始化：vagrant init your_name
+启动: vagrant up
+连接: vagrant ssh
+销毁当前:vagrant destroy
+关机：vagrant halt
+打包：vagrant package
+重启：vagrant reload
+
+名称：config.vm.box = "base"
+修改内存：
+config.vm.provider "virtualbox" do |v|
+  v.customize ["modifyvm", :id, "--name", "your_name", "--memory", "512"]
+end
+
+设置ip：config.vm.network :private_network, ip: "11.11.11.11"
+
+hostname：config.vm.hostname = "your_name"
+
+同步目录：config.vm.synced_folder  "/Users/astaxie/data", "/vagrant_data"
+
+
+==========制作镜像===============
+在virtualbox中安装ubuntu(nat)
+Hostname：vagrant-[os-name]，例：vagrant-ubuntu
+Domain: vagrantup.com
+Root Password: vagrant
+Main account login: vagrant
+Main account password: vagrant
+
+安装常用软件
+groupadd admin
+usermod -G admin vagrant
+设置sudo：
+Defaults env_keep="SSH_AUTH_SOCK"
+%admin ALL=NOPASSWD: ALL
+设置key
+mkdir ~/.ssh/
+cd ~/.ssh
+wget http://github.com/mitchellh/vagrant/raw/master/keys/vagrant
+wget http://github.com/mitchellh/vagrant/raw/master/keys/vagrant.pub
+mv vagrant.pub authorized_keys
+安装virtual box guest additions
+apt-get install linux-headers-$(uname -r) build-essential
+ mount /dev/cdrom /mnt
+sh /mnt/VBoxLinuxAdditions.run
+清理缓存
+
+打包：
+进入virtual box目录
+vagrant package --output ubuntu.box --base vagrant-ubuntu
+
+

@@ -1,0 +1,2 @@
+iptables 转发8080到80端口
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080

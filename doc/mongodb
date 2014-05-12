@@ -4,3 +4,5 @@
 备份：mongodump -h dbhost -d dbname -o dbdirectory
 恢复：mongorestore -h dbhost -d dbname --directoryperdb dbdirectory
 
+默认mongodb生成的文件太大，如果你的文件不多 可以设置:
+storage.smallFiles = true

@@ -3,3 +3,14 @@ useradd -r -g mysql mysql
 tar xf percona-server-5.6.16-64.2.tar.gz
 cd percona-server-5.6.16-64.2
 mkdir build
+
+
+debian下安装：
+/etc/apt/sources.list.d/persona.list中增加：
+deb http://repo.percona.com/apt wheezy main
+运行
+sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
+sudo apt-get update
+apt-get install percona-server-server-5.5 percona-server-client-5.5
+sudo apt-get install percona-server-server percona-server-client
+mysql_secure_installation

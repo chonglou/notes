@@ -48,3 +48,25 @@ SELECT
 	  Round( Sum( data_free ) / 1024 / 1024, 3 ) AS 'Free Space (MB)'
 	  FROM information_schema.tables
 	  GROUP BY table_schema ;
+==========小内存优化==============
+default-storage-engine = MyISAM
+max_connections = 75
+skip-bdb
+skip-innodb
+skip-networking
+server-id = 1
+key_buffer = 256K
+max_allowed_packet=1M
+thread_stack = 64K
+table_cache = 4
+sort_buffer_size = 64K
+read_buffer_size = 256K
+read_rnd_buffer_size = 256K
+net_buffer_length = 2K
+thread_stack = 64K
+query_cache_limit=256K
+query_cache_size = 2M 
+
+检查参数
+mysqld --verbose --help
+mysqladmin variables

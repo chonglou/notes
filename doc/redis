@@ -6,3 +6,8 @@ KEYS *
 
 查看KEY类型
 TYPE name
+
+内存优化
+port 0 禁止监听端口
+打开unixsocket 和unixsocketperm
+设置 maxmemory= 10m

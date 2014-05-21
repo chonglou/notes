@@ -18,7 +18,7 @@ dh_make -s -e your-email -f ../nginx-1.4.6.tar.gz
 如果需要覆盖默认的configure,增加make任务:
 override_dh_auto_configure
 
-dpkg-buildpackage -rfakeroot
+dpkg-buildpackage -rfakeroot h或 dpkg-buildpackage -uc -us
 修改源码之后 需要dpkg-source --commit提交补丁
 
 

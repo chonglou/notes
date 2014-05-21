@@ -6,10 +6,20 @@ git checkout -b local-branchname origin/remote_branchname
 git push origin --delete branchName
 
 放弃未提交的更改：
-git reset --hard
+git reset --hard 
+放弃最近的merge
+git reset --hard HEAD~
 放弃未跟踪的文件及目录：
 git clean -fd
 
+查看单个文件历史
+git log --pretty=oneline 文件名
+
+压缩最近的提交
+git reset --soft <commit>  
+
+修改commit
+git rebase -i <commit>  
 
 比较分支
 git diff topic master     # 将两个分支上最新的提交做diff，相当于diff了两个commit

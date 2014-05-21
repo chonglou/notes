@@ -1,0 +1,4 @@
+nslookup 
+> server 8.8.8.8
+> set type=mx 
+> your domain

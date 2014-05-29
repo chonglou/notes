@@ -22,7 +22,7 @@ deb包制作(以nginx为例)
 
 
 ### 文件安装说明
- * debian/package.upstart => etc/init/package.conf 
- * debian/package.init => etc/init.d/package
- * debian/package.default => etc/default/package
+ * debian/package.upstart 到 etc/init/package.conf 
+ * debian/package.init 到 etc/init.d/package
+ * debian/package.default 到 etc/default/package
  * 其它文件放:debian/package.install 源路径（文件）和目的地（目录）都用相对路径

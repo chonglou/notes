@@ -1,0 +1,32 @@
+
+自打用了archlinux后 抛弃debian很多年了 最近在把手头的服务器切换至debian
+
+默认的EDITOR是nano 巨难用 换成vim：
+
+update-alternatives --config editor
+
+更改jdk路径
+
+update-alternatives --config editor
+
+编译virtualbox的模块时报错“make[1]: ngcc：命令未找到” 解决办法：
+
+#进入kernel源码目录
+make menuconfig
+把General setup=》Cross-compiler tool prefix改为空
+
+1. 编译kernel
+
+需要的包：fakeroot，kernel-package
+
+make-kpkg clean
+fakeroot make-kpkg --initrd --revision=version.1.0 kernel_image
+
+lxde用户需要加入的组：powerdev
+
+mercurial版本老报“abort: requirement 'dotencode' not supported!”
+
+add-apt-repository ppa:tortoisehg-ppa/releases
+add-apt-repository ppa:mercurial-ppa/releases
+apt-get update
+apt-get install mercurial

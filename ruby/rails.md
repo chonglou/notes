@@ -75,4 +75,13 @@ default_scope :order=>'title'
 #### Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes.
 安装nodejs 或 Gemfile中增加: gem 'therubyracer'
 
+### bin/rails:6: warning: already initialized constant APP_PATH
+Exiting
+bin/rails:6: warning: already initialized constant APP_PATH
+/data/github/chonglou/portal/bin/rails:6: warning: previous definition of APP_PATH was here
+Error: Command 'puma' not recognized
+Usage: rails COMMAND [ARGS]
+
+    rake rails:update:bin 
+
 

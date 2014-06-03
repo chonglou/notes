@@ -78,6 +78,15 @@ aio is required on Linux, you need to install the required library
 	query_cache_size = 2M 
 
 #### 检查参数
-	mysqld --verbose --help
-	mysqladmin variables
+	mysqld --verbose --help # 参数列表
+	mysqladmin variables # 当前运行信息
 
+#### 常用命令
+ * mysqld_safe 用来启动mysql并监控在它意外停机时重新启动
+ * mysqld_multi 同一主机管理多个mysql
+ * mysqladmin 系统管理任务
+ * mysqldump和mysqlhotcopy 备份或者复制到另一数据库
+ * mysqlcheck 数据库检查、分析、优化及对受损数据表进行修复
+
+#### 小信息
+ * 不建议使用rm删除数据库目录 innodb数据表会在共享表空间中写入信息

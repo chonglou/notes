@@ -72,12 +72,6 @@ MAC OS笔记
 	git checkout 77993cb Library/Formula/bash.rb # 第一列是bash版本号
 	brew install bash
 
-#### "dtrace: failed to compile script probes.d: Preprocessor not found"错误
-把dtrace关掉即可
-	export CONFIGURE_OPTS='--disable-dtrace'
-	rbenv install 2.1.2
-或者：
-	./configure --diable-dtrace
 
 #### 'brew update'出错
 error: Your local changes to the following files would be overwritten by merge: Library/Formula/bash.rb Please, commit your changes or stash them before you can merge. Aborting Error: Failure while executing: git pull -q origin refs/heads/master:refs/remotes/origin/master

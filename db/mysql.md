@@ -90,3 +90,13 @@ aio is required on Linux, you need to install the required library
 
 #### 小信息
  * 不建议使用rm删除数据库目录 innodb数据表会在共享表空间中写入信息
+
+#### 压缩传输问题
+ * 通常方法
+	gzip -c /backup/db.sql > db.sql.gz # server1运行 server1读和写
+	scp db.sql.gz user@host:/backup # server1运行 server1读 server2写
+	gunzip /backup/db.sql.gz # server2运行 server2读和写
+ * 一步到位(gzip -i更快 bzip2压缩率高 lzo解压缩快)
+ 	gzip -c /backup/db.sql | ssh user@host "gunzip -c - > /backup/db.sql" # server1运行 server1读 server2写
+
+ 

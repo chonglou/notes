@@ -88,12 +88,52 @@ aio is required on Linux, you need to install the required library
  * mysqldump和mysqlhotcopy 备份或者复制到另一数据库
  * mysqlcheck 数据库检查、分析、优化及对受损数据表进行修复
 
-#### 小信息
+### 小信息
+ * cpu居高不下 一般都是索引问题
  * 不建议使用rm删除数据库目录 innodb数据表会在共享表空间中写入信息
+ * 如果join表数N小于等于7，则optimizer_search_depth=N+1，否则选N
+ * 内存要占到数据的15-25%的比例 热数据需要数据库的80%大小
+ * MySQL每个query只能运行在一个CPU上
+ * 使用新的内存分配算法jemalloc 或 tcmalloc
+ * raid卡cache：使用带电的Raid，启用WriteBack，　对于加速redo log ,binary log, data file都有好处
+ * 连接超过200的场景使用thread pool
+ * 60-80%的内存分给innodb_buffer_pool_size 超80%会用到swap
+ * redo log 一般一个小时的量即可
+
+#### 磁盘io
+ * innodb_io_capactiy 在sas 15000转的下配置800就可以了，在ssd下面配置2000以上。
+ * 在MySQL 5.6:
+	innodb_lru_scan\_depth =  innodb_io\_capacity / innodb_buffer_pool_instances
+	innodb_io_capacity\_max  =  min(2000, 2 * innodb\_io_capacity)
+
+#### 并发设置
+	innodb_thread_concurrency = 0 #使用thread pool
+	innodb_thread_concurrency =16 – 32 # 5.5
+	innodb_thread_concurrency =36 # 5.6
+
+#### log刷新机制
+	innodb_flush_log_at_trx_commit  = 1 // 最安全
+	innodb_flush_log_at_trx_commit  = 2 // 　较好性能
+	innodb_flush_log_at_trx_commit  = 0 // 　最好的情能
+	binlog\_sync = 1  // 需要group commit支持，如果没这个功能可以考虑0来获得较佳性能。
+	innodb_flush\_method = O\_DIRECT # 数据文件
+#### 系统限制更改
+	ulimit -n # 更改文件句柄
+	ulimit -u # 进程数限制
+	numctl –interleave=all # 禁掉NUMA
+#### 合适的io调度
+	echo dealine >/sys/block/{DEV-NAME}/queue/scheduler #默认是noop
+#### 优化文件系统
+	(rw, noatime,nodiratime,nobarrier) # xfs参数
+	(rw,noatime,nodiratime,nobarrier,data=ordered) # ext4参数
+#### SSD或固态硬盘
+	innodb_page_size = 4K
+	Innodb_flush_neighbors = 0
+
 
 #### 压缩传输问题
  * 通常方法
-	gzip -c /backup/db.sql > db.sql.gz # server1运行 server1读和写
+	gzip -c /backup/db.sql \> db.sql.gz # server1运行 server1读和写
 	scp db.sql.gz user@host:/backup # server1运行 server1读 server2写
 	gunzip /backup/db.sql.gz # server2运行 server2读和写
  * 一步到位(gzip -i更快 bzip2压缩率高 lzo解压缩快)

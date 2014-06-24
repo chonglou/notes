@@ -13,3 +13,5 @@ ssh相关笔记
 
  * 测试
     ssh user@hostname #如果登陆失败 检查.ssh(0700) authorized_keys(400)权限
+ * ubuntu下启用root登陆(/etc/ssh/sshd.conf)
+	PermitRootLogin yes

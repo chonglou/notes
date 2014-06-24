@@ -7,7 +7,7 @@ rbenv可以管理多版本的ruby
 	git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 
 ### add to .bashrc:
-	PATH="$HOME/.rbenv/bin:$PATH"
+	export PATH="$HOME/.rbenv/bin:$PATH"
 	eval "$(rbenv init -)"
 
 ### check:

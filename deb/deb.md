@@ -9,7 +9,7 @@ deb包制作(以nginx为例)
     tar xf nginx-1.4.6.tar.gz
     cd nginx-1.4.6
     dh_make -s -e your-email -f ../nginx-1.4.6.tar.gz
-    dpkg-buildpackage -rfakeroot
+    dpkg-buildpackage -rfakeroot 或 dpkg-buildpackage -uc -us
 
 #### 查看结果
     dpkg -x nginx_1.4.6-1_amd64.deb . #解压缩

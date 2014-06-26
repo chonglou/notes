@@ -42,3 +42,34 @@ docket笔记
 	docker pull base/arch
 #### mac下ssh 会有问题 需要端口映射(2222是你的端口)
 	VBoxManage modifyvm "boot2docker-vm" --natpf1 "RULE_NAME,tcp,,2222,,2222" #mac下需要先关闭boot2docker
+
+### archlinux docker file(ssh和zsh)
+ * 创建：docker build --rm -t zsh .
+ * 启动：docker run -p 2222:22 -d -P --name zsh_t zsh
+ * 登录：ssh -p 2222 root@localhost
+
+	FROM base/arch
+	MAINTAINER Jitang Zheng jitang.zheng@gmail.com
+
+	RUN pacman -Syu --noconfirm --ignore filesystem
+	RUN pacman -S --noconfirm --needed zsh git curl net-tools tree vim openssh base-devel dnsutils
+
+	RUN pacman -R vi --noconfirm
+
+	RUN locale-gen en_US en_US.UTF-8
+
+	RUN git clone git://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh
+	RUN cp /root/.oh-my-zsh/templates/zshrc.zsh-template /root/.zshrc
+	RUN chsh -s /bin/zsh
+
+	RUN /usr/bin/ssh-keygen -A
+	RUN sed -i -e 's/^UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+	RUN echo 'root:123456' | chpasswd
+	RUN cp /usr/share/vim/vim74/vimrc_example.vim /root/.vimrc
+
+	EXPOSE 22
+	CMD    ["/usr/sbin/sshd", "-D"]
+
+
+
+

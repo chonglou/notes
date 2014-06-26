@@ -1,14 +1,23 @@
-Centos下nginx+php安装脚本
+Centos下nginx+php设置
 ------------
 
-### lnp.sh
+### nginx配置文件中增加
+    location ~ \.php$ {
+        root   /usr/share/nginx/html;
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+	fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+
+### lnp.sh 一键安装脚本
+<code>
 #!/bin/sh
 
 ##
 # Centos+Nginx+Php安装脚本
 # php mysql xml memcache gd imagemagick mbstring 等常用模块安装 详情见info.php页
 ##
-<code>
 cat > /etc/yum.repos.d/nginx.repo <<EOF
 [nginx]
 name=nginx repo
@@ -30,3 +39,4 @@ echo "extension=imagick.so" > /etc/php.d/imagick.ini
 /etc/init.d/php-fpm start
  
 </code>
+

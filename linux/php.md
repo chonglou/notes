@@ -11,7 +11,7 @@ Centos下nginx+php设置
     }
 
 ### lnp.sh 一键安装脚本
-<code>
+<pre><code>
 #!/bin/sh
 
 ##
@@ -38,5 +38,5 @@ echo "extension=imagick.so" > /etc/php.d/imagick.ini
 /etc/init.d/nginx start
 /etc/init.d/php-fpm start
  
-</code>
+</code></pre>
 

@@ -1,6 +1,6 @@
 iptables web服务器 demo
 -----------------------
-<code>
+<pre><code>
 #!/bin/sh
 ##
 # 防火墙规则demo
@@ -41,4 +41,4 @@ AICMP="0 3 3/4 4 8 11 12 14 16 18"
 for tyicmp in $AICMP; do
 	ff -A INPUT -p icmp --icmp-type $tyicmp -j ACCEPT
 done
-</code>
+</code></pre>

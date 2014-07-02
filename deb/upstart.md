@@ -10,7 +10,7 @@ upstart 笔记
 #### upstart start/stop无法退出bug（start之后需要'stop servicename'start才会退出）
 原因：upstart 追踪的pid与实际的不同
 解决办法：reboot或自动fork进程到id为目标id为止（见下列代码）
-<code>
+<pre><code>
 #!/usr/bin/env
  
 class Workaround
@@ -71,4 +71,4 @@ if $0 == __FILE__
   raise "USAGE: #{$0} pid" if pid.nil?
   Workaround.new Integer pid
 end
-</code>
+</code></pre>

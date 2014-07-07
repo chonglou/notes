@@ -60,3 +60,9 @@ EXIM4笔记
  * 删除所有5天前的队列邮件 exiqgrep -o 432000 -i | xargs exim –Mrm
  * 冻结所有来自某一发件人的邮件 exiqgrep -i -f 发件人@zeknet.com | xargs exim -Mf
  * 清空队列 exim -bpru | awk {'print $3'} | xargs exim -Mrm
+
+### 常见问题
+#### 'Mail failure - no recipient addresses'错误, 在exim.conf中增加
+
+	extract_addresses_remove_arguments = false
+

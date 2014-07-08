@@ -1,7 +1,7 @@
 Centos下nginx+php+mysql一键编译安装脚本
 ---------------------------------------
 ### 适用于centos 5/6/7 版本
-<pre><code>
+```
 #!/bin/sh
 nginx_version=1.6.0
 php_version=5.3.28
@@ -195,4 +195,5 @@ echo "Please RE-LOGIN to make bash env active"
 echo "You can run 'service mysqld|nginx|php-fpm start|stop|restart' to manage lnmp services."
 echo "Enjoy it, if have any question, please issue at https://github.com/chonglou/notes!"
 
-</code></pre>
+```
+

@@ -18,5 +18,8 @@ https://github.com/chonglou/notes/blob/master/linux/lnmp_yum.sh
 
 ### PHP网站一键部署脚本
 下载地址：https://github.com/chonglou/notes/blob/master/linux/php_deploy.sh
+用法：
+ * 上传到服务器上执行
+ * 本地 ssh user@host < php_deploy.sh
 
 

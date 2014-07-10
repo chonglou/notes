@@ -16,3 +16,7 @@ https://github.com/chonglou/notes/blob/master/linux/lnmp_yum.sh
 ### Centos下nginx+php+mysql一键编译安装脚本(自动下载源码并编译安装)
 下载地址：https://github.com/chonglou/notes/blob/master/linux/lnmp_build.sh
 
+### PHP网站一键部署脚本
+下载地址：https://github.com/chonglou/notes/blob/master/linux/php_deploy.sh
+
+

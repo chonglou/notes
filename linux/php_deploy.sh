@@ -12,6 +12,9 @@ root='/tmp/var/www/change_me'
 git_repo='git@github.com:chonglou/php_demo.git'
 git_branch='master'
 
+#最近保留版本数
+keep_versions=7
+
 #-----------------------------------------------------
 
 check(){
@@ -72,14 +75,22 @@ deploy(){
 		ln -sv $root/shared/$d $current/$d
 	done
 
-	ln -svf $current $root/current
+	ln -nsvf $current $root/current
 
 }
 
+clean(){
+	cd $root
+	keep_versions=$(($keep_versions+1))
+	ls $root | grep '^2[0-9]\+' | sort -r -n | tail -n +$keep_versions | xargs rm -r
+
+}
 
 echo "CHECKING..."
 check
 echo "DEPLOYING..."
 deploy
+echo "CLEAN..."
+clean
 echo "SUCCESS FINISH..."
 echo "Enjoy it, if have any question, please issue at https://github.com/chonglou/notes!"

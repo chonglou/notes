@@ -83,9 +83,9 @@ server {
 ### 编辑技巧
 
 * 显示目录
-<pre><code>
-	<<TableOfContents(3)>>
-</code></pre>
+
+	\<\<TableOfContents(3)\>\>
+
 * 图片内嵌展示
 <pre><code>
 	{{attachment:graphics.png}}
@@ -109,7 +109,7 @@ nginx配置文件中增加(文件放/opt/www/moin/wiki/htdocs下)
 
 * 包含页面
 
-	<<Include(SomePage)>>
+	\<\<Include(SomePage)\>\>
 
 * 编辑中隐藏
 <pre><code>

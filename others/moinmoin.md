@@ -83,13 +83,13 @@ server {
 ### 编辑技巧
 
 * 显示目录
-
+<pre><code>
 	<<TableOfContents(3)>>
-
+</code></pre>
 * 图片内嵌展示
-
+<pre><code>
 	{{attachment:graphics.png}}
-
+</code></pre>
 * robots.txt和favicon.ico
 
 nginx配置文件中增加(文件放/opt/www/moin/wiki/htdocs下)
@@ -112,24 +112,25 @@ nginx配置文件中增加(文件放/opt/www/moin/wiki/htdocs下)
 	<<Include(SomePage)>>
 
 * 编辑中隐藏
-
+<pre><code>
 	#acl All: 
-
+</code></pre>
 * 允许公开评论的页面
-
+<pre><code>
 	#acl All:read,write 
-
+</code></pre>
 * Google 网站验证 修改wikiconfig.py文件，添加
-
+<pre><code>
 	html_head = '<meta name="google-site-verification" content="替换成你的" />'
-
+</code></pre>
 * sitemap.xml
 
 Sitemap 可方便网站管理员通知搜索引擎他们网站上有哪些可供抓取的网页。Moin对此的支持是非常简单的，只需要在任何页面链接（最好是主页）之后加上?action=sitemap即可
 
 * 扩展模板 修改配置文件
-
+<pre><code>
 	page_header1=u''
 	page_header2=u''
 	page_footer1=u''
 	page_footer2=u''
+</code></pre>

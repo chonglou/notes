@@ -66,3 +66,6 @@ o n p a
 #### chroot:
     arch-chroot /mnt/arch /bin/bash
 
+
+#### /tmp分区禁用tmpfs
+    systemctl mask tmp.mount

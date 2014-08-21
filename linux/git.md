@@ -43,6 +43,9 @@ git 笔记
  * 添加远程仓库：
 	git remote add origin git@hostname:aaa.git
 
+ * 修改远程仓库
+	git remote set-url origin <URL>
+
  * 第一次push需要：
 	git push -u origin master
 

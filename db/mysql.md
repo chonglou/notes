@@ -40,6 +40,13 @@ aio is required on Linux, you need to install the required library
 
 ### 常见问题
 
+#### 备份与恢复
+	mysqldump -u 用户名 -p 数据库名 > 文件名
+	mysql -u 用户名 -p 数据库名 < 文件名
+	# 带压缩 
+	mysqldump -u 用户名 -p 数据库名 | gzip > 文件名
+	gunzip < 文件名 | mysql -u 用户名 -p 数据库名
+
 #### 忘记root密码处理
 启动：mysqld_safe --skip-grant-tables &
 	mysql -u root mysql

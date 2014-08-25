@@ -1,5 +1,11 @@
 iptables web服务器 demo
 -----------------------
+### 保存规则
+	iptables-save > /etc/iptables/iptables.rules
+	iptables-restore < /etc/iptables/iptables.rules
+
+### WEB服务器常见规则
+
 <pre><code>
 #!/bin/sh
 ##

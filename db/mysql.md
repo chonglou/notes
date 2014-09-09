@@ -33,6 +33,7 @@ aio is required on Linux, you need to install the required library
 
 
 ### 第一次启动:
+
 	chown -R mysql /usr/local/mysql/
 	scripts/mysql_install_db --user=mysql
 	/usr/local/mysql/bin/mysqld_safe --user=mysql &
@@ -41,6 +42,7 @@ aio is required on Linux, you need to install the required library
 ### 常见问题
 
 #### 备份与恢复
+
 	mysqldump -u 用户名 -p 数据库名 > 文件名
 	mysql -u 用户名 -p 数据库名 < 文件名
 	# 带压缩 
@@ -48,12 +50,15 @@ aio is required on Linux, you need to install the required library
 	gunzip < 文件名 | mysql -u 用户名 -p 数据库名
 
 #### 忘记root密码处理
-启动：mysqld_safe --skip-grant-tables &
+启动：
+	
+	mysqld_safe --skip-grant-tables &
 	mysql -u root mysql
 	mysql> UPDATE user SET password=PASSWORD("new password") WHERE user='root';
 	mysql> FLUSH PRIVILEGES;
 
 #### 查询数据库大小
+
 	SELECT
 	  table_schema AS 'Db Name',
 	    Round( Sum( data_length + index_length ) / 1024 / 1024, 3 ) AS 'Db Size (MB)',
@@ -61,7 +66,13 @@ aio is required on Linux, you need to install the required library
 		  FROM information_schema.tables
 		  GROUP BY table_schema ;
 
+#### 一行授权
+
+  CREATE DATABASE redmine CHARACTER SET utf8;
+	GRANT ALL PRIVILEGES ON redmine.* TO 'redmine'@'localhost' IDENTIFIED BY 'my_password';
+
 #### 小内存优化(my.cnf) 不适合生产环境
+
 	[mysqld]
 	basedir		= /usr
 	datadir		= /var/lib/mysql

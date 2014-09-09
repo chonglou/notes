@@ -43,6 +43,9 @@ git 笔记
  * 添加远程仓库：
 	git remote add origin git@hostname:aaa.git
 
+ * 删除远程仓库
+	git remote rm origin
+
  * 修改远程仓库
 	git remote set-url origin <URL>
 

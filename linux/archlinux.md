@@ -69,3 +69,11 @@ o n p a
 
 #### /tmp分区禁用tmpfs
     systemctl mask tmp.mount
+
+
+
+### 其它
+
+#### 包迁移
+	pacman -Qe | awk '{print $1}' > package_list.txt # 列出所有安装的包
+	pacman -S `cat package_list.txt` # 安装包

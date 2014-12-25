@@ -4,7 +4,7 @@ MAC OS笔记
 ### 开发环境设置
 安装xcode
 #### 安装包管理软件：brew
-	ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 #### 设置环境变量：
 	export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"

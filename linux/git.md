@@ -8,6 +8,9 @@ git 笔记
  * 删除远程分支
 	git push origin --delete branchName
 
+ * 放弃更改
+    git checkout -f
+
  * 放弃未提交的更改：
 	git reset --hard 
 

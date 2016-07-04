@@ -1,6 +1,10 @@
 git 笔记
 --------------------
 
+ * 中文文件名乱码
+
+    git config --global core.quotepath false
+
  * 获取远程分支
 	git fetch
 	git checkout -b local-branchname origin/remote_branchname 
@@ -98,3 +102,10 @@ git 笔记
 	git tag -d v0.9
 	git push origin :refs/tags/v0.9
 
+
+ * 重置分支
+    git log
+    git reset --hard 7b78c88
+    git push -f
+    git merge go
+    git push

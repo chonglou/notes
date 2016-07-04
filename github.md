@@ -1,5 +1,8 @@
 ## github
 
+### 测试
+    ssh -T git@github.com
+
 ### 同步fork 代码
 
     git remote -v

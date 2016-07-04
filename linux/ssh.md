@@ -7,6 +7,7 @@ ssh相关笔记
 
 ### 无密码登陆
  * 创建公钥
+    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 
 	ssh-keygen -t rsa #本地
 

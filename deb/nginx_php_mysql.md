@@ -11,8 +11,6 @@ Ubuntu+nginx+mysql+php
 
 ## Php
     apt-get -y update
-    add-apt-repository ppa:ondrej/php5-5.6
-    apt-get -y update
-    apt-get -y install php5-fpm php5-mcrypt php5-curl php5-cli php5-mysql php5-gd php5-intl php5-xsl 
+    apt-get -y install php-fpm php-mcrypt php-curl php-mysql php-gd php-intl php-xsl 
 
 

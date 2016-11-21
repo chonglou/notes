@@ -115,3 +115,10 @@ git 笔记
     git branch -m old_branch new_branch         # Rename branch locally    
     git push origin :old_branch                 # Delete the old branch    
     git push --set-upstream origin new_branch # Push the new branch, set local branch to track the new remote
+
+* 清理文件(https://rtyley.github.io/bfg-repo-cleaner/)
+    java -jar bfg-1.12.12.jar --strip-blobs-bigger-than 100M [仓库目录]
+    java -jar bfg-1.12.12.jar --delete-files id_{dsa,rsa} [仓库目录]
+   
+    git gc --prune=now --aggressive
+    

@@ -95,6 +95,10 @@ git 笔记
 
  * 推送标签:git push origin tag_name
 
+ * 标签附注
+	git tag -a v1.4 -m 'my version 1.4'
+	git show v1.4
+
  * 推送所有标签
 	git push origin --tags
 

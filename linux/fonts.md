@@ -13,3 +13,7 @@ Chinese
 * wqy-bitmapfont - Bitmapped Song Ti (serif) Chinese font
 * ttf-i.bmingAUR - CJK serif font that emphasis on an old-style typeface
 * ttf-twAUR - Kai and Song traditional Chinese font from the Ministry of Education of Taiwan
+
+```
+sudo pacman -S adobe-source-han-sans-cn-fonts adobe-source-han-sans-tw-fonts ttf-arphic-ukai ttf-arphic-uming opendesktop-fonts wqy-microhei wqy-zenhei wqy-bitmapfont 
+```

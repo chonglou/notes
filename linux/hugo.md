@@ -12,11 +12,17 @@ export GOPATH PATH
 ```
 * 安装hugo
 ```bash
-go get -u github.com/spf13/hugo
-hugo new site yuezang
-cd yuezang
+go get -u github.com/kardianos/govendor
+govendor get github.com/spf13/hugo
+cd $GOPATH/src/github.com/spf13/hugo
+make install
+```
+* 创建站点
+```bash
+hugo new site change-me
+cd change-me
 git init
-git remote add deploy deploy@www.yuezang.me:/var/www/www.yuezang.me/repo.git
+git remote add deploy deploy@www.change-me.com:/var/www/www.change-me.com/repo.git
 ```
 * 撰写
 ```bash
@@ -39,9 +45,9 @@ hugo server --buildDrafts
 #### 部署
 * GIT仓库
 ```
-ssh deploy@www.yuezang.me
-server$ mkdir -pv /var/www/www.yuezang.me
-server$ cd /var/www/www.yuezang.me
+ssh deploy@www.change-me.com
+server$ mkdir -pv /var/www/www.change-me.com
+server$ cd /var/www/www.change-me.com
 server$ git --bare init repo.git
 server$ cd repo.git
 server$ touch hooks/post-receive
@@ -51,7 +57,7 @@ server$ chmod +x hooks/post-receive
 * hooks/post-receive内容
 ```
 #!/bin/sh
-WORK_DIR=/var/www/www.yuezang.me
+WORK_DIR=/var/www/www.change-me.com
 THEME=dim0627/hugo_theme_robust
 GIT_REPO=$WORK_DIR/repo.git
 TMP_GIT_CLONE=$WORK_DIR/tmp
@@ -69,11 +75,11 @@ exit
 server {
   listen 443;
   ssl on;
-  ssl_certificate /etc/ssl/certs/www.yuezang.me.crt;
-  ssl_certificate_key /etc/ssl/private/www.yuezang.me.key;
-  server_name www.yuezang.me;
-  root /var/www/www.yuezang.me/public;
+  ssl_certificate /etc/ssl/certs/www.change-me.com.crt;
+  ssl_certificate_key /etc/ssl/private/www.change-me.com.key;
+  server_name www.change-me.com;
+  root /var/www/www.change-me.com/public;
   access_log off;
-  error_log /var/www/www.yuezang.me/logs/error.log;
+  error_log /var/www/www.change-me.com/logs/error.log;
 }
 ```

@@ -19,3 +19,11 @@ imagemagick笔记
 
 #### 查看图片信息
     identify new.jpg
+
+
+
+#### 限定大小
+    convert -resize 800x800 -quality 50 1405407568-633.jpg 800.jpg
+    find ./ -regex '.*\(jpg\|JPG\|png\|jpeg\)' -size +500k -exec convert -resize 50%x50% {} {} \;
+
+

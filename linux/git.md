@@ -126,3 +126,17 @@ git 笔记
    
     git gc --prune=now --aggressive
     
+
+
+* git拒绝合并无关的历史纪录
+    git pull origin master --allow-unrelated-histories
+
+
+* 删除文件
+使用 git filter-branch 替换历史，然后 --force push。
+
+比如把写有密码的Rakefile不小心push到Github上的话，做以下操作即可。
+
+$ git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch Rakefile' --prune-empty --tag-name-filter cat -- --all
+$ git push origin master --force
+

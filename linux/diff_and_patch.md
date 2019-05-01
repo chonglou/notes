@@ -1,5 +1,8 @@
 diff and patch
 
+# 比较目录差别
+diff -uN a b
+
 # 产生补丁
 diff -uN from-file to-file > to-file.patch
  
